@@ -1,4 +1,4 @@
-# Todo Full-Stack Web Application
+# Todo Full-Stack Web Application Chatbot
 
 A full-stack todo application with user accounts, task CRUD operations, and synced database storage.
 
@@ -103,23 +103,39 @@ The application will be available at `http://localhost:3000`.
    git branch -M main
    git push -u origin main
    ```
+# Deploy FastAPI Backend on Hugging Face Spaces
 
-### Backend Deployment (Render)
+## 1. Create Space
+- Sign up at [Hugging Face](https://huggingface.co)
+- Go to **Spaces → Create new Space**
+- Choose **Docker**, set visibility, and name your Space
 
-1. Create an account on [Render](https://render.com)
-2. Connect your GitHub repository
-3. Create a new Web Service
-4. Select your repository
-5. Set the environment to "Python"
-6. Set the build command: `pip install -r requirements.txt`
-7. Set the start command: `uvicorn src.main:app --host=0.0.0.0 --port=$PORT`
-8. Add environment variables:
-   - `SECRET_KEY`: Your secret key
-   - `ALGORITHM`: HS256
-   - `ACCESS_TOKEN_EXPIRE_MINUTES`: 30
-   - `DATABASE_URL`: Your PostgreSQL connection string
-   - `ALLOWED_ORIGINS`: Your frontend URL (e.g., https://your-frontend.vercel.app)
-9. Deploy the service
+## 2. Project Structure
+- `src/main.py` – FastAPI app
+- `requirements.txt` – Python dependencies
+- `Dockerfile`
+
+## 3. Dockerfile Setup
+- Base image: Python 3.10
+- Install dependencies from `requirements.txt`
+- Copy project files
+- Start with: `uvicorn src.main:app --host 0.0.0.0 --port 7860`
+
+## 4. Environment Variables
+Add in Space settings:
+- `SECRET_KEY`
+- `ALGORITHM` = HS256
+- `ACCESS_TOKEN_EXPIRE_MINUTES` = 30
+- `DATABASE_URL` – PostgreSQL connection string
+- `ALLOWED_ORIGINS` – Frontend URL (e.g., `https://your-frontend.vercel.app`)
+
+## 5. Deploy
+- Hugging Face builds and deploys automatically
+- Backend URL: `https://<your-space-name>.hf.space`
+- Use this URL in your frontend API configuration
+
+**Done!** Your FastAPI backend is live.
+
 
 ### Frontend Deployment (Vercel)
 
