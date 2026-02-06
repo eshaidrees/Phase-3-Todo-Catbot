@@ -1,0 +1,84 @@
+{
+  "name": "todo-chatbot-agent",
+  "version": "1.0.0",
+  "description": "An intelligent agent for managing todos through chat interface",
+  "type": "chatbot",
+  "features": [
+    "natural-language-processing",
+    "todo-management",
+    "task-tracking",
+    "reminders"
+  ],
+  "capabilities": {
+    "add-todo": {
+      "description": "Add a new todo item",
+      "input": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string",
+            "description": "The task to be added"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "default": "medium"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date",
+            "optional": true
+          }
+        },
+        "required": ["task"]
+      }
+    },
+    "list-todos": {
+      "description": "List all todo items",
+      "input": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string",
+            "enum": ["all", "completed", "pending"],
+            "default": "all"
+          }
+        }
+      }
+    },
+    "complete-todo": {
+      "description": "Mark a todo as completed",
+      "input": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the todo to mark as completed"
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    "delete-todo": {
+      "description": "Delete a todo item",
+      "input": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the todo to delete"
+          }
+        },
+        "required": ["id"]
+      }
+    }
+  },
+  "configuration": {
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "maxTokens": 1000
+  },
+  "dependencies": [],
+  "author": "Hackathon Team",
+  "license": "MIT"
+}

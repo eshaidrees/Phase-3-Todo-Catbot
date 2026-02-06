@@ -1,0 +1,24 @@
+services:
+- type: web
+  name: todo-backend
+  env: python
+  buildCommand: pip install -r requirements.txt
+  startCommand: uvicorn src.main:app --host=0.0.0.0 --port=$PORT
+  envVars:
+  - key: SECRET_KEY
+    generateValue: true
+  - key: ALGORITHM
+    value: HS256
+  - key: ACCESS_TOKEN_EXPIRE_MINUTES
+    value: "30"
+  - key: DATABASE_URL
+    fromDatabase:
+      name: todo-db
+      property: connectionString
+  - key: ALLOWED_ORIGINS
+    value: https://todo-frontend.vercel.app  # Replace with your frontend URL
+
+databases:
+- name: todo-db
+  region: frankfurt  # Choose your preferred region
+  plan: free
